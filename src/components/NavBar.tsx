@@ -17,7 +17,7 @@ export default function NavBar() {
                 <div className="display-flex align-center justify-between">
                     <Space align="center">
                         <img
-                            style={{height: 28}}
+                            style={{height: 28, display: "flex"}}
                             src="https://i.loli.net/2020/04/21/ST9ru5mwVqUXnKO.png"
                             alt=""
                         />

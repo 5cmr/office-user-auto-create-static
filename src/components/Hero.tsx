@@ -65,7 +65,7 @@ export default function Hero() {
                         <Modal
                             title="获取 Office"
                             centered
-                            visible={modalVisible}
+                            open={modalVisible}
                             width={1000}
                             maskClosable={false}
                             destroyOnClose

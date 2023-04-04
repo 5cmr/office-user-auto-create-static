@@ -11,6 +11,7 @@ import {
     MailOutlined
 } from '@ant-design/icons'
 import copy from 'copy-to-clipboard'
+import officeApi from "@/services/office";
 
 export default function RegForm() {
     const [form] = Form.useForm()
@@ -30,9 +31,8 @@ export default function RegForm() {
 
     useEffect(() => {
         setSpinning(true)
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/getOfficeConfig`)
-            .then(async r => {
-                    const data = await r.json()
+        officeApi.getConfig().then(async r => {
+                    const data = await r.data
                     setOfficeConfig(data)
                 }
             )
@@ -41,12 +41,8 @@ export default function RegForm() {
 
     const onFinish = (formData: object) => {
         setSpinning(true)
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/getOffice`, {
-            method: 'POST',
-            body: JSON.stringify(formData)
-        })
-            .then(async r => {
-                    const data = await r.json()
+        officeApi.create(formData).then(async r => {
+                    const data = await r.data
                     if (r.status === 201) {
                         message.success('账号创建成功')
                         setCreatedAccount(data?.account)
@@ -129,6 +125,16 @@ export default function RegForm() {
                         </Select.Option>
                     ))}
                 </Select>
+            </Form.Item>
+
+            <Form.Item
+                label="姓名"
+                name="nickname"
+                rules={[{required: true, message: '必选'}]}
+            >
+                <Input
+                    placeholder="姓名"
+                />
             </Form.Item>
 
             <Form.Item
