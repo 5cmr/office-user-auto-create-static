@@ -3,7 +3,7 @@ import {message} from "antd";
 
 // axios实例
 const service = axios.create({
-    baseURL: import.meta.env.REACT_APP_API_BASE_URL as any,
+    baseURL: import.meta.env.VITE_APP_API_BASE_URL as any,
     timeout: 60000,
     headers: {"Content-Type": "application/json;charset=UTF-8"}
 });
@@ -38,7 +38,7 @@ service.interceptors.response.use(
 
         const res = response.data;
         // 响应成功
-        if (res.code === 0 || res.code === 200) {
+        if (response.status === 200) {
             return res;
         }
 
@@ -46,7 +46,7 @@ service.interceptors.response.use(
         message.error(res.msg);
 
         // 没有权限，如：未登录、登录过期等，需要跳转到登录页
-        if (res.code === 401) {
+        if (res.status === 401) {
 
         }
 
