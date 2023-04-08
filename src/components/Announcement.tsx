@@ -8,10 +8,11 @@ export default function Announcement() {
 
     useEffect(() => {
         announcementApi.getDetail().then(async r => {
-                const data = r.data
-                setModalText(data)
-                setModalVisible(!!data)
-            })
+            console.log(r.data)
+            const data = r.data
+            setModalText(data.content)
+            setModalVisible(!!data.content)
+        })
     }, [])
 
     return (

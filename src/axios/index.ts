@@ -38,15 +38,15 @@ service.interceptors.response.use(
 
         const res = response.data;
         // 响应成功
-        if (response.status === 200) {
+        if (res.code === 200) {
             return res;
         }
 
         // 错误提示
-        message.error(res.msg);
+        message.error(res.message);
 
         // 没有权限，如：未登录、登录过期等，需要跳转到登录页
-        if (res.status === 401) {
+        if (res.code === 401) {
 
         }
 
